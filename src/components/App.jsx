@@ -13,7 +13,8 @@ function Task({ task, index, items}) {
     return (
         <div><li style={{textDecoration:task.isCancelled?"line-through":"None"}} > {task.text} </li>
 
-            <button onClick={()=>completeTask(index)}>Complete</button>
+            <button style={{padding:4} }onClick={()=>completeTask(index)}>Completed</button>
+            <button style={{marginLeft:20, padding:4}} onClick={()=>removeTodo(index)}>Remove from list</button>
         </div>
     );
 }
@@ -44,13 +45,16 @@ function Task({ task, index, items}) {
     newTasks[index].isCancelled =true;
     setItems(newTasks);
 }
+function removeTodo(index)
+{
+  setItems(prevItems=>{
+    return prevItems.filter((items,id)=>{return (index!==id);});});
+}
   return (
     <div className="container">
     <h1>{curr}</h1>
       <div className="heading">
         <h1>To-Do List </h1>
-        
-        
       </div>
       <div className="form">
         <input onChange={handleChange} type="text" value={inputText} />
